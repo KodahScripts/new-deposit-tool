@@ -1,8 +1,8 @@
 <template>
-<label class="toggle-switch">
-  <input type="checkbox">
-  <span class="slider"></span>
-</label>
+  <label class="toggle-switch">
+    <input type="checkbox" />
+    <span class="slider"></span>
+  </label>
 </template>
 
 <style scoped>
@@ -30,26 +30,26 @@
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 34px; /* Rounded corners for the track */
 }
 
 /* The slider knob */
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 26px;
   width: 26px;
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%; /* Rounded knob */
 }
 
 /* Styles when the checkbox is checked */
 input:checked + .slider {
-  background-color: #2196F3; /* Blue when checked */
+  background-color: #2196f3; /* Blue when checked */
 }
 
 input:checked + .slider:before {

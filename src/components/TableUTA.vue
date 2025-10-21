@@ -14,7 +14,7 @@
 import TableRowUTA from './TableRowUTA.vue'
 import ReportRowUTA from '../utils/constants.ts'
 interface Props {
-  reportHeader: ReportRowUTA,
+  reportHeader: ReportRowUTA
   reportData: Array<ReportRowUTA>
 }
 const props = defineProps<Props>()
@@ -31,5 +31,4 @@ const props = defineProps<Props>()
   font-weight: bold;
   padding: 8px;
 }
-
 </style>

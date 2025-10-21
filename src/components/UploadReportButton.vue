@@ -4,8 +4,7 @@
     <label :for="id">Upload {{ idString }}</label>
   </div>
   <div v-else>
-    <label :for="id" @click="handleClear">Clear {{ idString }}</label
-    >
+    <label :for="id" @click="handleClear">Clear {{ idString }}</label>
   </div>
 </template>
 <script setup lang="ts">
@@ -55,5 +54,4 @@ label {
   cursor: pointer;
   background-color: #f2f5f7;
 }
-
 </style>

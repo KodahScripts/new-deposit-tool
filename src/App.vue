@@ -2,50 +2,47 @@
   <div class="left-col">
     <div class="top-section">
       <Selector option1="BMWT" option2="WCN" @selection="changeStore" />
-      <Selector option1="UTA" option2="CC" @selection="changeReport" />
-      <UploadReportButton :id="`${selectedOutput}-report`" @file-data="loadData" @clear-data="clearData" />
+      <UploadReportButton
+        :id="`${selectedOutput}-report`"
+        @file-data="loadData"
+        @clear-data="clearData"
+      />
     </div>
   </div>
   <div class="content">
-    <div v-if="tempData != null" class="inner-content">
-      <div class="table">
-        <div class="table-head">
-          <div class="table-row">
-            <div class="table-cell" v-for="header in reportHeader">{{ header }}</div>
-          </div>
-        </div>
-        <div class="table-body">
-          <div class="table-row" v-for="row in reportData">
-            <div class="table-cell" v-for="cell in row">{{ cell }}</div>
-          </div>
-        </div>
-      </div>
+    <div v-if="xlData != null" class="inner-content">
+      <DepositCardList :allDeposits="reportData" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import UploadReportButton from './components/UploadReportButton.vue'
+
 import Selector from './components/Selector.vue'
+import UploadReportButton from './components/UploadReportButton.vue'
+import DepositCardList from './components/DepositCardList.vue'
 
 const currentStore = ref(null)
-const selectedOutput = ref(null)
-const tempData = ref(null)
+const selectedOutput = ref('UTA')
+const xlData = ref(null)
 
 const cleanData = computed(() => {
-  return tempData.value.filter(row => row[15] != 'DENIED' && row[15] != 'REFERRAL').map(row => {
-    return {
-      chkdate: row[1],
-      chk: row[4],
-      chkAmt: row[5],
-      totalAmt: row[6],
-      merchant: row[7],
-      chkName: row[8],
-      user: row[20],
-      ref: row[21]
-    }
-  })
+  return xlData.value
+    .filter((row) => row[15] != 'DENIED' && row[15] != 'REFERRAL')
+    .map((row, index) => {
+      return {
+        uid: index,
+        chkdate: row[1],
+        chk: row[4],
+        chkAmt: row[5],
+        totalAmt: row[6],
+        merchant: row[7],
+        chkName: row[8],
+        user: row[20],
+        ref: row[21],
+      }
+    })
 })
 
 const reportHeader = computed(() => {
@@ -60,16 +57,12 @@ const changeStore = (storeAbbr: string) => {
   currentStore.value = storeAbbr
 }
 
-const changeReport = (reportAbbr: string) => {
-  selectedOutput.value = reportAbbr
-}
-
 const loadData = (data) => {
-  tempData.value = data
+  xlData.value = data
 }
 
 const clearData = () => {
-  tempData.value = null
+  xlData.value = null
 }
 </script>
 <style scoped>

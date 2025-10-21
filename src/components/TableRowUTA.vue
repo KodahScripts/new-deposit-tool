@@ -6,16 +6,16 @@
   </div>
 </template>
 <script setup lang="ts">
-  import ReportRowUTA from '../utils/constants.ts' 
-  
-  interface Props {
-    rowData: ReportRowUTA,
-    hasOptions?: boolean
-  }
-  
-  const props = withDefaults(defineProps<Props>(), {
-    hasOptions: true
-  })
+import ReportRowUTA from '../utils/constants.ts'
+
+interface Props {
+  rowData: ReportRowUTA
+  hasOptions?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  hasOptions: true,
+})
 </script>
 <style scoped>
 .table-row {
